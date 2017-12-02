@@ -1,24 +1,12 @@
 import Generator from 'yeoman-generator';
 
 export default class Main extends Generator {
-  filepath = 'public/index.html';
-
-  prompting() {
-    return this.prompt([{
-      type: 'input',
-      name: 'filepath',
-      message: 'Enter a filepath: ',
-      default: this.filepath,
-    }]).then(values => {
-      this.filepath = values.filepath;
-    });
-  }
-
-  writing() {
-    this.fs.copyTpl(
-      this.templatePath('index.html'),
-      this.destinationPath(this.filepath),
-      { title: 'Templating with Yeoman' },
-    );
+  initializing() {
+    const options = { composite: true };
+    this.composeWith(require.resolve('../Types'), options);
+    this.composeWith(require.resolve('../Renderer'), options);
+    this.composeWith(require.resolve('../Container'), options);
+    this.composeWith(require.resolve('../Module'), options);
+    this.composeWith(require.resolve('../Dependencies'), options);
   }
 }

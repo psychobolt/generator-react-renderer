@@ -1,9 +1,9 @@
 {
-  "name": "generator-example-generator",
+  "name": "@psychobolt/generator-react-renderer",
   "version": "0.0.1",
-  "description": "Example Yeoman generator",
+  "description": "Yeoman generator for scaffolding extensible ES6 React Fiber renderers",
   "main": "generators/app/index.js",
-  "repository": "https://github.com/psychobolt/yeoman-generator-boilerplate",
+  "repository": "https://github.com/psychobolt/generator-react-renderer",
   "author": "psychobolt",
   "license": "MIT",
   "private": false,
@@ -21,6 +21,7 @@
     "yeoman-generator"
   ],
   "dependencies": {
+    "lodash": "^4.17.4",
     "yeoman-generator": "^2.0.1"
   },
   "devDependencies": {
