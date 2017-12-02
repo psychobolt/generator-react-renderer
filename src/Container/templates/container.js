@@ -6,7 +6,7 @@ import { CONSTANTS } from './<%= typesResolve %>';
 
 export default class <%= container %> extends React.Component {
   static propTypes = {
-    renderer: PropTypes.instanceOf(<%= renderer %>),
+    renderer: PropTypes.func,
     children: PropTypes.node,
   };
 
@@ -16,7 +16,7 @@ export default class <%= container %> extends React.Component {
   };
 
   static childContextTypes = {
-    container: PropTypes.object.isRequired,
+    container: PropTypes.func.isRequired,
   };
 
   constructor(props, context) {
@@ -28,10 +28,10 @@ export default class <%= container %> extends React.Component {
     const node = reconciler.createContainer(this.container);
     this.update = () => {
       const { children } = this.props;
-      renderer.updateContainer(children, node, this);
+      reconciler.updateContainer(children, node, this);
     };
     this.unmount = () => {
-      renderer.updateContainer(null, node, this);
+      reconciler.updateContainer(null, node, this);
     };
   }
 

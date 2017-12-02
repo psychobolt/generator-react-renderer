@@ -6,7 +6,7 @@ import TYPES from './<%= typesResolve %>';
 export function getTypes(instanceFactory) {
   return (type, { children, ...rest }, container) => {
     const TYPE = instanceFactory[type];
-    return TYPE || TYPE(rest, container, children);
+    return TYPE && TYPE(rest, container, children);
   };
 }
 
