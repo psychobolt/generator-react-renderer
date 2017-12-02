@@ -12,6 +12,7 @@ export default class <%= container %> extends React.Component {
 
   static defaultProps = {
     renderer: <%= renderer %>,
+    children: null,
   };
 
   static childContextTypes = {
@@ -28,10 +29,10 @@ export default class <%= container %> extends React.Component {
     this.update = () => {
       const { children } = this.props;
       renderer.updateContainer(children, node, this);
-    }
+    };
     this.unmount = () => {
       renderer.updateContainer(null, node, this);
-    }
+    };
   }
 
   getChildContext() {
