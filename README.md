@@ -27,11 +27,18 @@ Scaffolds a Instance factory template that called be on Reconciler hostConfig's 
 yo @psychobolt/react-renderer:Types 
 ```
 
+#### Component
+
+Scaffolds a file that exports helper functions for renderer.
+```sh
+yo @psychobolt/react-renderer:Component
+```
+
 #### Renderer
 
 Scaffolds a React ES6 Renderer class. 
 ```sh
-yo @psychobolt/react-renderer:Renderer types.js
+yo @psychobolt/react-renderer:Renderer types.js component.js
 ```
 
 ES6 class Renderer allows third-party extensions.
@@ -78,9 +85,9 @@ export default () => (
 Organizes scripts into a module.
 ```sh
 # without Container
-yo @psychobolt/react-renderer:Module CustomRenderer Custom.renderer.js Custom.types.js
+yo @psychobolt/react-renderer:Module CustomRenderer Custom.renderer.js Custom.types.js component.js
 # with Container
-yo @psychobolt/react-renderer:Module CustomRenderer Custom.renderer.js types.js CustomContainer Custom.container.js
+yo @psychobolt/react-renderer:Module CustomRenderer Custom.renderer.js types.js component.js CustomContainer Custom.container.js
 ```
 
 #### Dependencies

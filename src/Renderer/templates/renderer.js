@@ -2,6 +2,7 @@ import Reconciler from 'react-reconciler';
 import invariant from 'fbjs/lib/invariant';
 
 import TYPES from './<%= typesResolve %>';
+import { diffProps, updateProps } from './<%= componentResolve %>';
 
 export function getTypes(instanceFactory) {
   return (type, { children, ...rest }, container) => {
@@ -30,7 +31,7 @@ const defaultHostConfig = {
     return true;
   },
   prepareUpdate(instance, type, oldProps, newProps, container, hostContext) {
-    invariant(false, 'prepareUpdate is NOOP. Make sure you implement it or return a truthy value.');
+    return diffProps(oldProps, newProps);
   },
   shouldSetTextContent(type, props) {
     invariant(false, 'shouldSetTextContent is NOOP. Make sure you implement it or return false.');
@@ -50,7 +51,7 @@ const defaultHostConfig = {
   now: Date.now,
   mutation: {
     commitUpdate(instance, updatePayload, type, oldProps, newProps, internalInstanceHandle) {
-      invariant(false, 'commitUpdate is NOOP. Make sure you implement it.');
+      updateProps(instance, updatePayload);
     },
     commitMount(instance, type, newProps, internalInstanceHandle) {
     },
@@ -62,10 +63,13 @@ const defaultHostConfig = {
       invariant(false, 'appendChild is NOOP. Make sure you implement it.');
     },
     appendChildToContainer(container, child) {
+      invariant(false, 'appendChildToContainer is NOOP. Make sure you implement it.');
     },
     insertBefore(parent, child, beforeChild) {
+      invariant(false, 'insertBefore is NOOP. Make sure you implement it.');
     },
-    insertInContainer(container, child, beforeChild) {
+    insertInContainerBefore(container, child, beforeChild) {
+      invariant(false, 'insertInContainerBefore is NOOP. Make sure you implement it.');
     },
     removeChild(parent, child) {
       invariant(false, 'removeChild is NOOP. Make sure you implement it.');

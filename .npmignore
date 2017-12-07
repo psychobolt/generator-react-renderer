@@ -4,7 +4,7 @@ flow-typed
 src
 .babelrc
 .eslintignore
-.eslintrc.json
+tmp/.eslintrc.json
 .flowconfig
 .travis.yml
 yarn.lock

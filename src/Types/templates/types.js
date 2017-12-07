@@ -15,7 +15,7 @@ export default {
     schema - KEY: (props, container, children) => any
     e.g. [CONSTANT.MyType]: (props, container, children) => new container.MyType(props),
   */
-  Container: (props, container, children) => invariant(false, 'Container factory is NOOP. Make sure you implement it.'),
+  [CONSTANTS.Container]: (props, container, children) => invariant(false, 'Container factory is NOOP. Make sure you implement it.'),
 };
 
 export const {

@@ -67,4 +67,5 @@ generators/*
 package-lock.json
 
 # temp files
-tmp
+tmp/*
+!tmp/.eslintrc.json

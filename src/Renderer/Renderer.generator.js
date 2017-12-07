@@ -10,18 +10,16 @@ export default class Renderer extends Generator {
     super(args, opts);
     const required = !opts.composite;
     this.argument('typesFilename', { type: String, required });
+    this.argument('componentFilename', { type: String, required });
   }
 
   prompting() {
-    this.typesFilename = this.options.typesFilename || this.config.get('typesFilename');
-    this.enabled = typeof this.typesFilename === 'string';
     return this.prompt([
       {
         type: 'input',
         name: 'renderer',
         message: 'Enter the Renderer name:',
         default: this.renderer,
-        when: this.enabled,
       },
       {
         type: 'input',
@@ -30,25 +28,24 @@ export default class Renderer extends Generator {
         default: this.filename,
       },
     ]).then(({ renderer, filename }) => {
-      if (this.enabled) {
-        this.renderer = _.upperFirst(_.camelCase(renderer));
-        this.filename = filename.endsWith('.js') ? filename : `${filename}.js`;
-        this.config.set('renderer', this.renderer);
-        this.config.set('rendererFilename', this.filename);
-      }
+      this.renderer = _.upperFirst(_.camelCase(renderer));
+      this.filename = filename.endsWith('.js') ? filename : `${filename}.js`;
+      this.config.set('renderer', this.renderer);
+      this.config.set('rendererFilename', this.filename);
     });
   }
 
   writing() {
-    if (this.enabled) {
-      this.fs.copyTpl(
-        this.templatePath('renderer.js'),
-        this.destinationPath(this.filename),
-        {
-          renderer: this.renderer,
-          typesResolve: this.typesFilename.slice(0, -3),
-        },
-      );
-    }
+    const typesFilename = this.options.typesFilename || this.config.get('typesFilename');
+    const componentFilename = this.options.componentFilename || this.config.get('componentFilename');
+    this.fs.copyTpl(
+      this.templatePath('renderer.js'),
+      this.destinationPath(this.filename),
+      {
+        renderer: this.renderer,
+        typesResolve: typesFilename.slice(0, -3),
+        componentResolve: componentFilename.slice(0, -3),
+      },
+    );
   }
 }

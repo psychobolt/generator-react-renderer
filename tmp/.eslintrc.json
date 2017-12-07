@@ -1,0 +1,9 @@
+{
+  "rules": {
+    "no-param-reassign": ["error", { "props": true, "ignorePropertyModificationsFor": ["instance"] }],
+    "no-unused-vars": "off"
+  },
+  "env": {
+    "browser": true
+  }
+}
