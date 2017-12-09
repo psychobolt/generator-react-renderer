@@ -20,8 +20,12 @@ export function diffProps(oldProps, newProps) {
   indexProps(propChanges, newProps);
   Object.entries(propChanges).forEach(([key, values]) => {
     if (values.length === 1) {
-      const [value] = values;
-      updatePayload.push(key, value);
+      if (key in newProps) {
+        const [value] = values;
+        updatePayload.push(key, value);
+      } else {
+        updatePayload.push(key, null);
+      }
     } else if (values.length === 2) {
       const [preValue, nextValue] = values;
       if (!_.isEqual(preValue, nextValue)) {
@@ -37,7 +41,11 @@ export function updateProps(instance, updatePayload) {
     const key = updatePayload[i - 1];
     const value = updatePayload[i];
     if (key === '$$myProp') {
-      // TODO update instance
+      if (value === null) {
+        // TODO update with the default value
+      } else {
+        // TODO update instance
+      }
     } else {
       invariant(false, 'updateProps is NOOP. Make sure you implement it.');
     }
