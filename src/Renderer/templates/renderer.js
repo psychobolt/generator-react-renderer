@@ -49,34 +49,33 @@ const defaultHostConfig = {
   },
   useSyncScheduling: true,
   now: Date.now,
-  mutation: {
-    commitUpdate(instance, updatePayload, type, oldProps, newProps, internalInstanceHandle) {
-      updateProps(instance, updatePayload);
-    },
-    commitMount(instance, type, newProps, internalInstanceHandle) {
-    },
-    commitTextUpdate(instance, type, newProps, internalInstanceHandle) {
-    },
-    resetTextContent(insntace) {
-    },
-    appendChild(parent, child) {
-      invariant(false, 'appendChild is NOOP. Make sure you implement it.');
-    },
-    appendChildToContainer(container, child) {
-      invariant(false, 'appendChildToContainer is NOOP. Make sure you implement it.');
-    },
-    insertBefore(parent, child, beforeChild) {
-      invariant(false, 'insertBefore is NOOP. Make sure you implement it.');
-    },
-    insertInContainerBefore(container, child, beforeChild) {
-      invariant(false, 'insertInContainerBefore is NOOP. Make sure you implement it.');
-    },
-    removeChild(parent, child) {
-      invariant(false, 'removeChild is NOOP. Make sure you implement it.');
-    },
-    removeChildFromContainer(container, child) {
-      invariant(false, 'removeChildFromContainer is NOOP. Make sure you implement it.');
-    },
+  supportsMutation: true,
+  commitUpdate(instance, updatePayload, type, oldProps, newProps, internalInstanceHandle) {
+    updateProps(instance, updatePayload);
+  },
+  commitMount(instance, type, newProps, internalInstanceHandle) {
+  },
+  commitTextUpdate(instance, type, newProps, internalInstanceHandle) {
+  },
+  resetTextContent(insntace) {
+  },
+  appendChild(parent, child) {
+    invariant(false, 'appendChild is NOOP. Make sure you implement it.');
+  },
+  appendChildToContainer(container, child) {
+    invariant(false, 'appendChildToContainer is NOOP. Make sure you implement it.');
+  },
+  insertBefore(parent, child, beforeChild) {
+    invariant(false, 'insertBefore is NOOP. Make sure you implement it.');
+  },
+  insertInContainerBefore(container, child, beforeChild) {
+    invariant(false, 'insertInContainerBefore is NOOP. Make sure you implement it.');
+  },
+  removeChild(parent, child) {
+    invariant(false, 'removeChild is NOOP. Make sure you implement it.');
+  },
+  removeChildFromContainer(container, child) {
+    invariant(false, 'removeChildFromContainer is NOOP. Make sure you implement it.');
   },
 };
 

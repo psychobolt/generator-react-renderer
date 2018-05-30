@@ -1,5 +1,6 @@
 # Generator React Renderer
 
+[![npm](https://img.shields.io/npm/v/generator-react-renderer.svg)](https://www.npmjs.com/package/generator-react-renderer)
 [![Build Status](https://travis-ci.org/psychobolt/generator-react-renderer.svg?branch=master)](https://travis-ci.org/psychobolt/generator-react-renderer)
 [![Dependencies Status](https://david-dm.org/psychobolt/generator-react-renderer.svg)](https://david-dm.org/psychobolt/generator-react-renderer)
 
@@ -22,14 +23,14 @@ yo @psychobolt/react-renderer # (Recommended) Runs all sub generators - see sect
 
 #### Types
 
-Scaffolds a Instance factory template that called be on Reconciler hostConfig's [createInstance](src/Renderer/templates/renderer.js#L13).
+Scaffolds a Instance factory template to be invoked in Reconciler's [createInstance](src/Renderer/templates/renderer.js#L13).
 ```sh
 yo @psychobolt/react-renderer:Types 
 ```
 
 #### Component
 
-Scaffolds a file that exports helper functions for renderer.
+Scaffolds a file that exports helper functions for [renderer](#renderer).
 ```sh
 yo @psychobolt/react-renderer:Component
 ```
