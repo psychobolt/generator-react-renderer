@@ -1,6 +1,6 @@
 # Generator React Renderer
 
-[![npm](https://img.shields.io/npm/v/generator-react-renderer.svg)](https://www.npmjs.com/package/generator-react-renderer)
+[![npm](https://img.shields.io/npm/v/@psychobolt/generator-react-renderer.svg)](https://www.npmjs.com/package/@psychobolt/generator-react-renderer)
 [![Build Status](https://travis-ci.org/psychobolt/generator-react-renderer.svg?branch=master)](https://travis-ci.org/psychobolt/generator-react-renderer)
 [![Dependencies Status](https://david-dm.org/psychobolt/generator-react-renderer.svg)](https://david-dm.org/psychobolt/generator-react-renderer)
 
