@@ -23,7 +23,7 @@ yo @psychobolt/react-renderer # (Recommended) Runs all sub generators - see sect
 
 #### Types
 
-Scaffolds a Instance factory template to be invoked in Reconciler's [createInstance](src/Renderer/templates/renderer.js#L13).
+Scaffolds a Instance factory template to be invoked in Reconciler's [createInstance](src/Renderer/templates/renderer.js#L14).
 ```sh
 yo @psychobolt/react-renderer:Types 
 ```
