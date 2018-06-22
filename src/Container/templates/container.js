@@ -44,12 +44,11 @@ class <%= container %> extends React.Component {
     return null;
   }
 }
-
-<% if (!provider) { -%>const Container = ({ renderer = new <%= renderer %>(), ...props }) =>
+<% if (!provider) { -%>
+const Container = ({ renderer = new <%= renderer %>(), ...props }) =>
   <<%= container %> {...props} renderer={renderer} />;
 Container.propTypes = {
   renderer: PropTypes // eslint-disable-line react/require-default-props
     .instanceOf(<%= container %>),
-};
-<% } %>
+};<% } %>
 export default <% if (provider) { -%>React.forwardRef((props, ref) => <<%= provider %> {...props} innerRef={ref} />)<% } else { %>Container<% } %>;
