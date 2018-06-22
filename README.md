@@ -104,7 +104,7 @@ import MyCustomType from './MyCustomType';
 export default () => (
   <CustomContainer>
     <Context.Consumer>
-      <MyCustomType />
+      {({ container }) => <MyCustomType container={containter} />}
     </Context.Consumer>
   </CustomContainer>
 );
