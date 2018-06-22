@@ -2,41 +2,25 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import <%= renderer %> from './<%= rendererResolve %>';
+<% if (provider) { -%>import <%= provider %> from './<%= providerResolve %>';<% } %>
 import { CONSTANTS } from './<%= typesResolve %>';
 
-export default class <%= container %> extends React.Component {
+class <%= container %> extends React.Component {
   static propTypes = {
-    renderer: PropTypes.func,
+    renderer: PropTypes.instanceOf(<%= renderer %>).isRequired,
+    container: PropTypes.instanceOf(Object),
     children: PropTypes.node,
-  };
+  }
 
   static defaultProps = {
-    renderer: <%= renderer %>,
+    container: null,
     children: null,
-  };
-
-  static childContextTypes = {
-    container: PropTypes.func.isRequired,
-  };
+  }
 
   constructor(props, context) {
     super(props, context);
-    const Renderer = this.props.renderer;
-    const renderer = new Renderer();
-    const { reconciler } = renderer;
-    this.container = renderer.createInstance(CONSTANTS.Container, {});
-    const node = reconciler.createContainer(this.container);
-    this.update = () => {
-      const { children } = this.props;
-      reconciler.updateContainer(children, node, this);
-    };
-    this.unmount = () => {
-      reconciler.updateContainer(null, node, this);
-    };
-  }
-
-  getChildContext() {
-    return { container: this.container };
+    const { renderer, container = renderer.createInstance(CONSTANTS.Container, {}) } = this.props;
+    this.mountNode = renderer.reconciler.createContainer(container);
   }
 
   componentDidMount() {
@@ -48,10 +32,24 @@ export default class <%= container %> extends React.Component {
   }
 
   componentWillUnmount() {
-    this.unmount();
+    this.props.renderer.reconciler.updateContainer(null, this.mountNode, this);
+  }
+
+  update = () => {
+    const { renderer, children } = this.props;
+    renderer.reconciler.updateContainer(children, this.mountNode, this);
   }
 
   render() {
     return null;
   }
 }
+
+<% if (!provider) { -%>const Container = ({ renderer = new <%= renderer %>(), ...props }) =>
+  <<%= container %> {...props} renderer={renderer} />;
+Container.propTypes = {
+  renderer: PropTypes // eslint-disable-line react/require-default-props
+    .instanceOf(<%= container %>),
+};
+<% } %>
+export default <% if (provider) { -%>React.forwardRef((props, ref) => <<%= provider %> {...props} innerRef={ref} />)<% } else { %>Container<% } %>;

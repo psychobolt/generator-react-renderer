@@ -7,6 +7,7 @@ export default class Main extends Generator {
     this.composeWith(require.resolve('../Component'), options);
     this.composeWith(require.resolve('../Renderer'), options);
     this.composeWith(require.resolve('../Container'), options);
+    this.composeWith(require.resolve('../Provider'), options);
     this.composeWith(require.resolve('../Module'), options);
     this.composeWith(require.resolve('../Dependencies'), options);
   }

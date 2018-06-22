@@ -1,6 +1,6 @@
 {
   "name": "@psychobolt/generator-react-renderer",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Yeoman generator for scaffolding extensible ES6 React Fiber renderers",
   "main": "generators/app/index.js",
   "repository": "https://github.com/psychobolt/generator-react-renderer",
@@ -10,8 +10,9 @@
   "scripts": {
     "prepublishOnly": "npm run build",
     "flow-typed": "rimraf flow-typed/npm && flow-typed install -s -o",
-    "build": "rimraf generators && babel src -d generators --copy-files",
-    "start": "npm run build -- -w",
+    "build": "rimraf generators && babel src -d generators --copy-files --source-maps",
+    "start": "npm run build",
+    "watch": "npm start -- -- -w",
     "lint": "eslint src *.js"
   },
   "files": [
@@ -21,12 +22,12 @@
     "yeoman-generator"
   ],
   "dependencies": {
-    "fbjs": "^0.8.16",
+    "fbjs": "^0.8.17",
     "lodash": "^4.17.10",
-    "prop-types": "^15.6.1",
-    "react": "^16.4.0",
-    "react-dom": "^16.4.0",
-    "react-reconciler": "^0.11.0",
+    "prop-types": "^15.6.2",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-reconciler": "^0.12.0",
     "yeoman-generator": "^2.0.5"
   },
   "devDependencies": {
@@ -39,12 +40,13 @@
     "cash-true": "^0.0.2",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
-    "eslint-plugin-flowtype": "^2.48.0",
+    "eslint-plugin-flowtype": "^2.49.3",
     "eslint-plugin-import": "^2.12.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-react": "^7.8.2",
-    "flow-bin": "^0.73.0",
+    "eslint-plugin-react": "^7.9.1",
+    "flow-bin": "^0.74.0",
     "flow-typed": "^2.4.0",
-    "rimraf": "^2.6.2"
+    "rimraf": "^2.6.2",
+    "yo": "^2.0.2"
   }
 }

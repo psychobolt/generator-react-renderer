@@ -2,11 +2,11 @@ import Generator from 'yeoman-generator';
 
 export default class Dependencies extends Generator {
   packages = [
-    'react@16.4.0',
-    'react-dom@16.4.0',
-    'react-reconciler@0.11.0',
-    'fbjs@0.8.16',
-    'prop-types@15.6.1',
+    'react@16.4.1',
+    'react-dom@16.4.1',
+    'react-reconciler@0.12.0',
+    'fbjs@0.8.17',
+    'prop-types@15.6.2',
     'lodash@4.17.10',
   ];
   enabled = true;

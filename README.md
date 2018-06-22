@@ -1,15 +1,20 @@
 # Generator React Renderer
 
+[![Stability](https://img.shields.io/badge/Stability-Experimental-Orange.svg)](https://nodejs.org/api/documentation.html#documentation_stability_index)
 [![npm](https://img.shields.io/npm/v/@psychobolt/generator-react-renderer.svg)](https://www.npmjs.com/package/@psychobolt/generator-react-renderer)
 [![Build Status](https://travis-ci.org/psychobolt/generator-react-renderer.svg?branch=master)](https://travis-ci.org/psychobolt/generator-react-renderer)
+
 [![Dependencies Status](https://david-dm.org/psychobolt/generator-react-renderer.svg)](https://david-dm.org/psychobolt/generator-react-renderer)
+[![Dev Dependencies Status](https://david-dm.org/psychobolt/generator-react-renderer/dev-status.svg)](https://david-dm.org/psychobolt/generator-react-renderer?type=dev)
 
 Yeoman generator for scaffolding extensible ES6 React Fiber renderers. NOTE: Includes a synchronous and experimental configuration of React reconciler, which is currently being used for my React renderer libraries. 
 
 ## Install
 
 ```sh
-npm install @psychobolt/generator-react-renderer
+npm install -g @psychobolt/generator-react-renderer
+# or
+yarn global add @psychobolt/generator-react-renderer
 ```
 
 ## Usage
@@ -43,10 +48,9 @@ yo @psychobolt/react-renderer:Renderer types.js component.js
 ```
 
 ES6 class Renderer allows third-party extensions.
-```js
-// ./MyCustomRenderer/index.js
+```jsx
 import React from 'React';
-import Renderer from './renderer.js'
+import Renderer from './renderer'
 
 import MyCustomType from './MyCustomType';
 
@@ -62,14 +66,14 @@ export default class MyCustomRenderer extends Renderer {
 
 #### Container
 
-Scaffolds a ES6 class Component Container which forwards the children node to the default renderer and exposes the container instance as a child [context](https://reactjs.org/docs/context.html).
+Scaffolds a ES6 class Component Container which forwards the children node to the default renderer.
 ```sh
 yo @psychobolt/react-renderer:Container CustomRenderer renderer.js types.js
 ```
 
 You can override the default renderer.
-```js
-import CustomContainer from './container.js'
+```jsx
+import CustomContainer from './container'
 import MyCustomType from './MyCustomType';
 
 import MyCustomRenderer from './MyCustomRenderer'
@@ -81,14 +85,39 @@ export default () => (
 );
 ```
 
+#### Provider
+
+Enables forwarding of the [context](https://reactjs.org/docs/context.html), including container object, to child nodes.
+
+```sh
+yo @psychobolt/react-renderer:Provider CustomRenderer renderer.js types.js CustomContainer container.js
+```
+
+Opt-in child nodes with the context: 
+
+```jsx
+import CustomContainer from './container';
+import { Context } from './provider';
+
+import MyCustomType from './MyCustomType';
+
+export default () => (
+  <CustomContainer>
+    <Context.Consumer>
+      <MyCustomType />
+    </Context.Consumer>
+  </CustomContainer>
+);
+```
+
 #### Module
 
 Organizes scripts into a module.
 ```sh
 # without Container
-yo @psychobolt/react-renderer:Module CustomRenderer Custom.renderer.js Custom.types.js component.js
+yo @psychobolt/react-renderer:Module CustomRenderer renderer.js types.js component.js
 # with Container
-yo @psychobolt/react-renderer:Module CustomRenderer Custom.renderer.js types.js component.js CustomContainer Custom.container.js
+yo @psychobolt/react-renderer:Module CustomRenderer renderer.js types.js component.js CustomContainer container.js
 ```
 
 #### Dependencies
