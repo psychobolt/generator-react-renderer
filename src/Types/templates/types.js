@@ -9,6 +9,8 @@ export const CONSTANTS = {
   Container: 'Container',
 };
 
+/* eslint-disable no-unused-vars */
+
 export default {
   /*
     Add your own instance factories here.
@@ -17,6 +19,8 @@ export default {
   */
   [CONSTANTS.Container]: (props, container, children) => invariant(false, 'Container factory is NOOP. Make sure you implement it.'),
 };
+
+/* eslint-enable no-unused-vars */
 
 export const {
   /*

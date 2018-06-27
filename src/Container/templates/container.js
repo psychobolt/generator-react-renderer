@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import <%= renderer %> from './<%= rendererResolve %>';
-<% if (provider) { -%>import <%= provider %> from './<%= providerResolve %>';<% } %>
+<% if (provider) { -%>import <%= provider %> from './<%= providerResolve %>';<% } %> // eslint-disable-line import/no-cycle
 import { CONSTANTS } from './<%= typesResolve %>';
 
-class <%= container %> extends React.Component {
+export class <%= container %> extends React.Component {
   static propTypes = {
     renderer: PropTypes.instanceOf(<%= renderer %>).isRequired,
     container: PropTypes.instanceOf(Object),
@@ -32,7 +32,8 @@ class <%= container %> extends React.Component {
   }
 
   componentWillUnmount() {
-    this.props.renderer.reconciler.updateContainer(null, this.mountNode, this);
+    const { renderer } = this.props;
+    renderer.reconciler.updateContainer(null, this.mountNode, this);
   }
 
   update = () => {

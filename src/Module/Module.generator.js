@@ -45,6 +45,7 @@ export default class Module extends Generator {
       const componentFilename = this.options.componentFilename || this.config.get('componentFilename');
       const container = this.options.container || this.config.get('container');
       const containerFilename = this.options.containerFilename || this.config.get('containerFilename');
+      const providerFilename = this.options.providerFilename || this.config.get('providerFilename');
       this.fs.copyTpl(
         this.templatePath('index.js'),
         this.destinationPath(`${this.module}/index.js`),
@@ -54,6 +55,7 @@ export default class Module extends Generator {
           typesResolve: typesFilename.slice(0, -3),
           container,
           containerResolve: containerFilename ? containerFilename.slice(0, -3) : false,
+          providerResolve: providerFilename ? providerFilename.slice(0, -3) : false,
         },
       );
       this.fs.move(this.destinationPath(typesFilename), this.destinationPath(`${this.module}/${typesFilename}`));
@@ -61,6 +63,9 @@ export default class Module extends Generator {
       this.fs.move(this.destinationPath(this.rendererFilename), this.destinationPath(`${this.module}/${this.rendererFilename}`));
       if (containerFilename) {
         this.fs.move(this.destinationPath(containerFilename), this.destinationPath(`${this.module}/${containerFilename}`));
+      }
+      if (providerFilename) {
+        this.fs.move(this.destinationPath(providerFilename), this.destinationPath(`${this.module}/${providerFilename}`));
       }
     }
   }

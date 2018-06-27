@@ -13,6 +13,8 @@ export function getTypes(instanceFactory) {
 
 const createInstance = getTypes(TYPES);
 
+/* eslint-disable no-unused-vars */
+
 const defaultHostConfig = {
   getRootHostContext(rootHostContext) {
     return rootHostContext;
@@ -79,8 +81,11 @@ const defaultHostConfig = {
   },
 };
 
+/* eslint-enable no-unused-vars */
+
 export default class <%= renderer %> {
   defaultHostConfig = defaultHostConfig;
+
   defaultTypes = TYPES;
 
   constructor() {

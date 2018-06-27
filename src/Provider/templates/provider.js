@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import <%= renderer %> from './<%= rendererResolve %>';
-import <%= container %> from './<%= containerResolve %>';
+import { <%= container %> } from './<%= containerResolve %>'; // eslint-disable-line import/no-cycle
 import { CONSTANTS } from './<%= typesResolve %>';
 
 export const Context = React.createContext();
@@ -28,7 +28,8 @@ export default class <%= provider %> extends React.Component {
     this.renderer = new Renderer();
     this.state = {
       container: this.renderer.createInstance(CONSTANTS.Container, {}),
-      mergeProps: props.mergeProps || (mergeProps => this.setState(mergeProps(this.state, props))),
+      mergeProps: props.mergeProps
+        || (mergeProps => this.setState(state => mergeProps(state, props))),
     };
   }
 
@@ -36,7 +37,9 @@ export default class <%= provider %> extends React.Component {
     const { innerRef, children, ...rest } = this.props;
     return (
       <<%= container %> {...rest} {...this.state} ref={innerRef} renderer={this.renderer}>
-        <Context.Provider value={this.state}>{children}</Context.Provider>
+        <Context.Provider value={this.state}>
+          {children}
+        </Context.Provider>
       </<%= container %>>
     );
   }
