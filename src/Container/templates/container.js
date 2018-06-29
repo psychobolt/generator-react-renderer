@@ -6,7 +6,7 @@ import <%= renderer %> from './<%= rendererResolve %>';
 import { CONSTANTS } from './<%= typesResolve %>';
 
 <% if (providerResolve) { -%>@<%= provider %><% } %>
-export class <%= container %> extends React.Component {
+class <%= container %> extends React.Component {
   static propTypes = {
     renderer: PropTypes.instanceOf(<%= renderer %>).isRequired,
     container: PropTypes.instanceOf(Object),
