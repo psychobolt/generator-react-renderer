@@ -90,7 +90,7 @@ export default () => (
 Enables forwarding of the [context](https://reactjs.org/docs/context.html), including container object, to child nodes.
 
 ```sh
-yo @psychobolt/react-renderer:Provider CustomRenderer renderer.js types.js CustomContainer container.js
+yo @psychobolt/react-renderer:Provider CustomRenderer renderer.js types.js
 ```
 
 Opt-in child nodes with the context: 
@@ -118,6 +118,8 @@ Organizes scripts into a module.
 yo @psychobolt/react-renderer:Module CustomRenderer renderer.js types.js component.js
 # with Container
 yo @psychobolt/react-renderer:Module CustomRenderer renderer.js types.js component.js CustomContainer container.js
+# with Provider
+yo @psychobolt/react-renderer:Module CustomRenderer renderer.js types.js component.js CustomContainer container.js CustomProvider provider.js
 ```
 
 #### Dependencies

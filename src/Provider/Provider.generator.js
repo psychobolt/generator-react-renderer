@@ -12,20 +12,18 @@ export default class Provider extends Generator {
     this.argument('renderer', { type: String, required });
     this.argument('rendererFilename', { type: String, required });
     this.argument('typesFilename', { type: String, required });
-    this.argument('container', { type: String, required });
-    this.argument('containerFilename', { type: String, required });
   }
 
   prompting() {
-    this.container = this.options.container || this.config.get('container');
-    this.containerFilename = this.options.containerFilename || this.config.get('containerFilename');
+    this.renderer = this.options.renderer || this.config.get('renderer');
+    this.rendererFilename = this.options.rendererFilename || this.config.get('rendererFilename');
     return this.prompt([
       {
         type: 'confirm',
         name: 'enabled',
         message: 'Do you want to generate a Context Provider?',
         default: this.enabled,
-        when: this.options.composite === true && typeof this.container === 'string' && typeof this.containerFilename === 'string',
+        when: this.options.composite === true && typeof this.renderer === 'string' && typeof this.rendererFilename === 'string',
       },
       {
         type: 'input',
@@ -57,18 +55,14 @@ export default class Provider extends Generator {
 
   writing() {
     if (this.enabled || !this.options.composite) {
-      const renderer = this.options.renderer || this.config.get('renderer');
-      const rendererFilename = this.options.rendererFilename || this.config.get('rendererFilename');
       const typesFilename = this.options.typesFilename || this.config.get('typesFilename');
       this.fs.copyTpl(
         this.templatePath('provider.js'),
         this.destinationPath(this.filename),
         {
-          renderer,
-          rendererResolve: rendererFilename.slice(0, -3),
+          renderer: this.renderer,
+          rendererResolve: this.rendererFilename.slice(0, -3),
           provider: this.provider,
-          container: this.container,
-          containerResolve: this.containerFilename.slice(0, -3),
           typesResolve: typesFilename.slice(0, -3),
         },
       );

@@ -67,7 +67,7 @@ export default class Container extends Generator {
           rendererResolve: this.rendererFilename.slice(0, -3),
           typesResolve: typesFilename.slice(0, -3),
           provider,
-          providerResolve: providerFilename.slice(0, -3),
+          providerResolve: providerFilename ? providerFilename.slice(0, -3) : false,
         },
       );
     }

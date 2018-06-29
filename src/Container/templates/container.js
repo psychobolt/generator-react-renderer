@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import <%= renderer %> from './<%= rendererResolve %>';
-<% if (provider) { -%>import <%= provider %> from './<%= providerResolve %>';<% } %> // eslint-disable-line import/no-cycle
+<% if (providerResolve) { -%>import <%= provider %> from './<%= providerResolve %>';<% } %>
 import { CONSTANTS } from './<%= typesResolve %>';
 
+<% if (providerResolve) { -%>@<%= provider %><% } %>
 export class <%= container %> extends React.Component {
   static propTypes = {
     renderer: PropTypes.instanceOf(<%= renderer %>).isRequired,
@@ -45,11 +46,11 @@ export class <%= container %> extends React.Component {
     return null;
   }
 }
-<% if (!provider) { -%>
+<% if (!providerResolve) { -%>
 const Container = ({ renderer = new <%= renderer %>(), ...props }) =>
   <<%= container %> {...props} renderer={renderer} />;
 Container.propTypes = {
   renderer: PropTypes // eslint-disable-line react/require-default-props
     .instanceOf(<%= container %>),
 };<% } %>
-export default <% if (provider) { -%>React.forwardRef((props, ref) => <<%= provider %> {...props} innerRef={ref} />)<% } else { %>Container<% } %>;
+export default <% if (providerResolve) { -%>React.forwardRef((props, ref) => <<%= container %> {...props} innerRef={ref} />)<% } else { %>Container<% } %>;

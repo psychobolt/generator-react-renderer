@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import <%= renderer %> from './<%= rendererResolve %>';
-import { <%= container %> } from './<%= containerResolve %>'; // eslint-disable-line import/no-cycle
 import { CONSTANTS } from './<%= typesResolve %>';
 
 export const Context = React.createContext();
 
-export default class <%= provider %> extends React.Component {
+export default Container => class <%= provider %>
+  extends React.Component {
   static propTypes = {
     renderer: PropTypes.oneOfType([<%= renderer %>]),
     mergeProps: PropTypes.func,
@@ -36,11 +36,11 @@ export default class <%= provider %> extends React.Component {
   render() {
     const { innerRef, children, ...rest } = this.props;
     return (
-      <<%= container %> {...rest} {...this.state} ref={innerRef} renderer={this.renderer}>
+      <Container {...rest} {...this.state} ref={innerRef} renderer={this.renderer}>
         <Context.Provider value={this.state}>
           {children}
         </Context.Provider>
-      </<%= container %>>
+      </Container>
     );
   }
 }
