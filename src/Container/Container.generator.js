@@ -40,7 +40,7 @@ export default class Container extends Generator {
         when: ({ enabled }) => enabled || !this.options.composite,
       },
     ]).then(({ enabled, container, filename }) => {
-      this.enabled = enabled;
+      this.enabled = enabled || !this.options.composite;
       if (this.enabled) {
         this.container = _.upperFirst(_.camelCase(container));
         this.filename = filename.endsWith('.js') ? filename : `${filename}.js`;

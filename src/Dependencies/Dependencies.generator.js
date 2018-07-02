@@ -10,6 +10,7 @@ export default class Dependencies extends Generator {
     'lodash@4.17.10',
   ];
   enabled = true;
+  dev = false;
   yarn = false;
 
   prompting() {
@@ -18,17 +19,26 @@ export default class Dependencies extends Generator {
         type: 'confirm',
         name: 'enabled',
         message: 'Do you want to install dependencies?',
+        when: this.options.composite === true,
         default: this.enabled,
+      },
+      {
+        type: 'confirm',
+        name: 'dev',
+        message: 'Do you want to install dependencies as dev?',
+        when: ({ enabled }) => enabled || !this.options.composite,
+        default: this.dev,
       },
       {
         type: 'confirm',
         name: 'yarn',
         message: 'Are you using Yarn for your project?',
-        when: ({ enabled }) => enabled,
+        when: ({ enabled }) => enabled || !this.options.composite,
         default: this.yarn,
       },
-    ]).then(({ enabled, yarn }) => {
-      this.enabled = enabled;
+    ]).then(({ enabled, dev, yarn }) => {
+      this.enabled = enabled || !this.options.composite;
+      this.dev = dev;
       this.yarn = yarn;
     });
   }
@@ -36,9 +46,9 @@ export default class Dependencies extends Generator {
   installing() {
     if (this.enabled) {
       if (this.yarn) {
-        this.yarnInstall(this.packages);
+        this.yarnInstall(this.packages, { dev: this.dev });
       } else {
-        this.npmInstall(this.packages);
+        this.npmInstall(this.packages, { 'save-dev': this.dev });
       }
     }
   }

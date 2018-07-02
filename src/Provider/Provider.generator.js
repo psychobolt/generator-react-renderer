@@ -40,8 +40,8 @@ export default class Provider extends Generator {
         when: ({ enabled }) => enabled || !this.options.composite,
       },
     ]).then(({ enabled, provider, filename }) => {
-      this.enabled = enabled;
-      if (this.enabled || !this.options.composite) {
+      this.enabled = enabled || !this.options.composite;
+      if (this.enabled) {
         this.provider = _.upperFirst(_.camelCase(provider));
         this.filename = filename.endsWith('.js') ? filename : `${filename}.js`;
         this.config.set('provider', this.provider);
@@ -54,7 +54,7 @@ export default class Provider extends Generator {
   }
 
   writing() {
-    if (this.enabled || !this.options.composite) {
+    if (this.enabled) {
       const typesFilename = this.options.typesFilename || this.config.get('typesFilename');
       this.fs.copyTpl(
         this.templatePath('provider.js'),
