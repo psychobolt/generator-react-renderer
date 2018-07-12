@@ -49,7 +49,6 @@ const defaultHostConfig = {
   },
   resetAfterCommit() {
   },
-  useSyncScheduling: true,
   now: Date.now,
   supportsMutation: true,
   commitUpdate(instance, updatePayload, type, oldProps, newProps, internalInstanceHandle) {
@@ -59,7 +58,7 @@ const defaultHostConfig = {
   },
   commitTextUpdate(instance, type, newProps, internalInstanceHandle) {
   },
-  resetTextContent(insntace) {
+  resetTextContent(instance) {
   },
   appendChild(parent, child) {
     invariant(false, 'appendChild is NOOP. Make sure you implement it.');
